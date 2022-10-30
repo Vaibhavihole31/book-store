@@ -46,6 +46,21 @@ app.get('/book',async (req, res) => {
     res.send(bookData);
   });
 
+
+app.get('/book/:id', async (req, res) => {
+  const id = req.params.id
+    let book;
+    try{
+        book = await Book.findById(id);
+    } catch (err){
+        console.log(err);
+    }
+    if(!book) {
+        return res.status(500).json({message:'No Book Found'})
+    }
+    return res.status(201).json({ book });
+})
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
