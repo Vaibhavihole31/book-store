@@ -84,6 +84,20 @@ app.put('/book/:id', async(req,res)=>{
   return res.status(200).json({ book });
 })
 
+app.delete('/book/:id', async(req,res)=>{
+  const id = req.params.id;
+  let book;
+  try{
+      book = await Book.findByIdAndRemove(id)
+  } catch (err) {
+      console.log(err);
+  }
+  if(!book) {
+      return res.status(404).json({message:'Unable To Delete By this Id'})
+  }
+  return res.status(200).json({ message:'Product Successfully Deleted' });
+})
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
