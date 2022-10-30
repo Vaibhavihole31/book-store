@@ -41,6 +41,11 @@ app.post('/book', async (req, res) => {
   })
 })
 
+app.get('/book',async (req, res) => {
+  const bookData =  await Book.find();
+    res.send(bookData);
+  });
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
