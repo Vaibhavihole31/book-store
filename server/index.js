@@ -13,6 +13,13 @@ mongoose.connect(process.env.MONGO_DB_URL, { useNewUrlParser: true, useUnifiedTo
   console.log('Connected to DB 📦');
 });
 
+app.post('/health',(req,res) => {
+  res.json({
+    status: "ok",
+    message: "Server is running"
+  })
+})
+
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
