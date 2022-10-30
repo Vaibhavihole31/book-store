@@ -46,7 +46,6 @@ app.get('/book',async (req, res) => {
     res.send(bookData);
   });
 
-
 app.get('/book/:id', async (req, res) => {
   const id = req.params.id
     let book;
@@ -59,6 +58,30 @@ app.get('/book/:id', async (req, res) => {
         return res.status(500).json({message:'No Book Found'})
     }
     return res.status(201).json({ book });
+})
+
+app.put('/book/:id', async(req,res)=>{
+  const id = req.params.id;
+  const {name,author,description,price,available,image} = req.body
+  let book;
+  try{
+      book = await Book.findByIdAndUpdate(id,{
+          name,
+          author,
+          description,
+          price,
+          available,
+          image
+      });
+      book = await book.save()
+  }catch (err){
+      console.log(err);
+  }
+
+  if(!book) {
+      return res.status(404).json({message:'Unable To Update By this Id'})
+  }
+  return res.status(200).json({ book });
 })
 
 if (process.env.NODE_ENV === 'production') {
