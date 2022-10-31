@@ -3,7 +3,14 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose')
-const Book = require("./models/Book")
+const Book = require("./models/Book");
+
+const health = require('./controllers/health');
+const bookPost = require('./controllers/bookpost');
+const bookGetAll = require('./controllers/bookgetall');
+const bookGetId = require('./controllers/bookgetid');
+const bookUpdate = require('./controllers/bookupdate');
+const bookDelete = require('./controllers/bookDelete');
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,89 +21,17 @@ mongoose.connect(process.env.MONGO_DB_URL, { useNewUrlParser: true, useUnifiedTo
   console.log('Connected to DB 📦');
 });
 
-app.post('/health', (req, res) => {
-  res.json({
-    status: "ok",
-    message: "Server is running"
-  })
-})
+app.post('/health', health);
 
-app.post('/book', async (req, res) => {
-  const { name, author, description, price, available, image } = req.body
+app.post('/book', bookPost);
 
-  const newBook = new Book({
-    name,
-    author,
-    description,
-    price,
-    available,
-    image
-  })
+app.get('/book', bookGetAll);
 
-  const savedBook = await newBook.save();
-  res.json({
-    success: true,
-    data: savedBook,
-    message: "New Book is added Successfully!"
-  })
-})
+app.get('/book/:id', bookGetId);
 
-app.get('/book',async (req, res) => {
-  const bookData =  await Book.find();
-    res.send(bookData);
-  });
+app.put('/book/:id', bookUpdate);
 
-app.get('/book/:id', async (req, res) => {
-  const id = req.params.id
-    let book;
-    try{
-        book = await Book.findById(id);
-    } catch (err){
-        console.log(err);
-    }
-    if(!book) {
-        return res.status(500).json({message:'No Book Found'})
-    }
-    return res.status(201).json({ book });
-})
-
-app.put('/book/:id', async(req,res)=>{
-  const id = req.params.id;
-  const {name,author,description,price,available,image} = req.body
-  let book;
-  try{
-      book = await Book.findByIdAndUpdate(id,{
-          name,
-          author,
-          description,
-          price,
-          available,
-          image
-      });
-      book = await book.save()
-  }catch (err){
-      console.log(err);
-  }
-
-  if(!book) {
-      return res.status(404).json({message:'Unable To Update By this Id'})
-  }
-  return res.status(200).json({ book });
-})
-
-app.delete('/book/:id', async(req,res)=>{
-  const id = req.params.id;
-  let book;
-  try{
-      book = await Book.findByIdAndRemove(id)
-  } catch (err) {
-      console.log(err);
-  }
-  if(!book) {
-      return res.status(404).json({message:'Unable To Delete By this Id'})
-  }
-  return res.status(200).json({ message:'Product Successfully Deleted' });
-})
+app.delete('/book/:id', bookDelete);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
