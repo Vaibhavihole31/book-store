@@ -3,6 +3,7 @@ import './AddBook.css'
 import headerImage from './header-img.png';
 
 function AddBook() {
+
   return (
     <>
       <div className='container mt-5'>
@@ -25,39 +26,39 @@ function AddBook() {
                 <input
                   type="text"
                   className="form-control"
-                  id="fullName"
+                  id="Name"
                   placeholder='Name'
                 />
               </div>
-              <div className="mb-3">
+               <div className="mb-3">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="email"
+                  id="author"
                   placeholder="Author"
                 />
               </div>
               <div className="mb-3">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="email"
+                  id="description"
                   placeholder="Description"
                 />
               </div>
               <div className="mb-3">
                 <input
-                  type="password"
+                  type="number"
                   className="form-control"
-                  id="password"
+                  id="price"
                   placeholder="Price"
                 />
               </div>
               <div className="mb-3">
                 <input
-                  type="phone"
+                  type="text"
                   className="form-control"
-                  id="mobile"
+                  id="image"
                   placeholder="Image"
                 />
               </div>
