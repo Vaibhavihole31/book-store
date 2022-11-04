@@ -3,7 +3,6 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose')
-const Book = require("./models/Book");
 
 const health = require('./controllers/health');
 const bookPost = require('./controllers/bookpost');

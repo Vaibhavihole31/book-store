@@ -1,8 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './AddBook.css'
 import headerImage from './header-img.png';
+import swal from "sweetalert";
+import {useNavigate} from 'react-router-dom';
 
 function AddBook() {
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+
+  async function addBook() {
+    const response = await axios.post('/book', {
+      name: name,
+      author: author,
+      description: description,
+      price: price,
+      image: image
+    })
+
+    if(response.data.success)
+    {
+      swal("Book Added Successfully!!");
+      navigate('/');
+    }
+    else{
+      swal("Invalid Credientials")
+    }
+
+    setName("");
+    setAuthor("");
+    setAuthor("");
+    setPrice("");
+    setImage("");
+
+  }
 
   return (
     <>
@@ -28,6 +65,7 @@ function AddBook() {
                   className="form-control"
                   id="Name"
                   placeholder='Name'
+                  value={name} onChange={(e) => { setName(e.target.value) }}
                 />
               </div>
                <div className="mb-3">
@@ -36,6 +74,7 @@ function AddBook() {
                   className="form-control"
                   id="author"
                   placeholder="Author"
+                  value={author} onChange={(e) => { setAuthor(e.target.value) }}
                 />
               </div>
               <div className="mb-3">
@@ -44,6 +83,7 @@ function AddBook() {
                   className="form-control"
                   id="description"
                   placeholder="Description"
+                  value={description} onChange={(e) =>{ setDescription(e.target.value) }}
                 />
               </div>
               <div className="mb-3">
@@ -52,6 +92,7 @@ function AddBook() {
                   className="form-control"
                   id="price"
                   placeholder="Price"
+                  value={price} onChange={(e) =>{ setPrice(e.target.value) }}
                 />
               </div>
               <div className="mb-3">
@@ -60,9 +101,10 @@ function AddBook() {
                   className="form-control"
                   id="image"
                   placeholder="Image"
+                  value={image} onChange={(e) => { setImage(e.target.value) }}
                 />
               </div>
-              <button className="addbook-page-btn w-100 mb-5" type="button">
+              <button className="addbook-page-btn w-100 mb-5" type="button" onClick={addBook}>
                 <i class="fa-solid fa-right-to-bracket"></i> Add Book
               </button>
             </form>

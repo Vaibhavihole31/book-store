@@ -1,12 +1,13 @@
+const Book = require("../models/Book");
+
 const bookPost = async (req, res) => {
-  const { name, author, description, price, available, image } = req.body
+  const { name, author, description, price, image } = req.body
 
   const newBook = new Book({
     name,
     author,
     description,
     price,
-    available,
     image
   })
 

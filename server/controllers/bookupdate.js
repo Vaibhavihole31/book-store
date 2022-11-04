@@ -1,3 +1,5 @@
+const Book = require("../models/Book");
+
 const bookUpdate = async (req, res) => {
     const id = req.params.id;
     const { name, author, description, price, available, image } = req.body
