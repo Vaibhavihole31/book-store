@@ -1,4 +1,4 @@
-.book-card{
+.book-card {
     background-color: #fff;
     padding: 20px;
     margin-top: 50px;
@@ -9,22 +9,41 @@
     text-align: center;
     border: 1px solid black;
     box-shadow: 5px 5px 10px 2px gray;
-  }
+}
 
-  .book-img{
+.book-img {
     height: 250px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
-  .btn-delete{
+.btn-delete {
     padding: 5px;
     margin: 3px;
     width: 120px;
     border-radius: 30px;
     border: none;
-    color: white;
-    background-color:  #efad19;
+    color: black;
+    background-color: #efad19;
     box-shadow: 0px 3px 1px -2px rgb(0, 0, 0)
-  }
+}
+
+.btn-update {
+    padding: 5px;
+    margin: 3px;
+    width: 120px;
+    border-radius: 30px;
+    border: none;
+    color: black;
+    background-color: #e0e0e0;
+    box-shadow: 0px 3px 1px -2px rgb(0, 0, 0)
+}
+
+.btn-delete:hover {
+    box-shadow: 3px 4px 2px -2px rgb(0, 0, 0);
+}
+
+.btn-update:hover {
+    box-shadow: 3px 4px 2px -2px rgb(0, 0, 0);
+}

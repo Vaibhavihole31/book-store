@@ -11,8 +11,8 @@ function Book(props) {
           <h6>Author: {props.author}</h6>
           <h6>Description: {props.description}</h6>
           <h6>price: {props.price}</h6>
-          <button className='btn-delete'>Delete</button>
-          <button className='btn-update'>Update</button>
+          <button className='btn-delete'><b>Delete</b></button>
+          <button className='btn-update'><b>Update</b></button>
         </div>
       </div>
     </div>
