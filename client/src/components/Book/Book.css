@@ -1,0 +1,19 @@
+.book-card{
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    text-align: center;
+    border: 1px solid black;
+    box-shadow: 5px 5px 10px 2px gray;
+  }
+
+  .book-img{
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
