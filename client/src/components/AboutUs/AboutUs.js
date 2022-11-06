@@ -2,7 +2,9 @@ import React from 'react'
 
 function AboutUs() {
   return (
-    <div>AboutUs</div>
+    <div>
+     <h1 className='text-center mt-5'>This Is Book Store Application 📚💙</h1>
+    </div>
   )
 }
 
